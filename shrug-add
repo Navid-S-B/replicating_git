@@ -1,0 +1,40 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Add regular files to .shrug/.index
+# 14-07-2020
+
+# Check for active repo
+if ! test -d .shrug
+then
+    echo "shrug-add: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+# Handle multiple arguments
+for file in "$@"
+do
+    # Ignore shrug scripts
+    if echo "$file" | grep 'shrug' > /dev/null
+    then
+        continue
+    fi
+    
+    # Check if file exists, if it doesn't, continue to copy files 
+    if test -e "$file"
+    then
+        # If file is not a regular file then activate copying folder error.
+        # Do not overwrite if files are the same.
+        if ! cp -u "$file" ".shrug/.index" 2> /dev/null
+        then
+            echo "shrug-add: error: '$file' is not a regular file" 
+            exit 1  
+        fi
+    else
+        if test -e ".shrug/.index/$file"
+        then
+            continue
+        else
+            echo "shrug-add: error: can not open '$file'"
+        fi
+    fi
+done

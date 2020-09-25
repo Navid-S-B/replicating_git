@@ -1,0 +1,11 @@
+Date, Start, Stop, Activity, Comments
+14/07/2020, 08:00, 23:59, coding, created all subset0 functions.
+15/07/2020, 00:00, 03:47, debugging, almost debugged entire subsett0 (need to debug shrug-commit for logging)
+15/07/2020. 03:47, 04:43, commenting, passed all subset0 autotests, dnd submitted first version
+15/07/2020, 08:30, 13:34, coding, created subset1 function "shrug-commit [-a] -m message"
+15/07/2020, 19:00, 21:00, coding, created subset1 function "shrug-rm [--force] [--cached] filenames..."
+15/07/2020, 21:00, 22:35, debugging, testing subset1 functions "shrug-commit [-a] -m message" and "shrug-rm [--force] [--cached] filenames..."
+15/07/2020, 22:35, 22:55, debugging, passed subset1_10 to subset1_13 and subset1_15 autotests
+15/07/2020, 23:00, 23:59, coding, creating shell script tests for functions
+16/07/2020, 00:00, 02:17, cleaning code, finished creating test scripts and getting code ready for submission
+16/07/2020, 02:17, 02:30, finalising code, commented code and fixed header docs

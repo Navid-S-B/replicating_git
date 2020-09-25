@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://cgi.cse.unsw.edu.au/~cs2041/20T2/assignments/ass2/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>
+COMP2041 20T2 —
+
+Assignment 2: sheeple, Sheeple
+
+</title><link rel="canonical" href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/">
+
+<link rel="stylesheet" href="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous">
+<link rel="stylesheet" href="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/course.css">
+
+<script src="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/jquery.min.js.download" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/popper.min.js.download" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<script src="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/bootstrap.min.js.download" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+
+<script src="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/course.js.download"></script>
+
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+<!-- MathJax. -->
+
+
+
+
+
+
+<script type="text/javascript" async="" src="./COMP2041 20T2 — Assignment 2_ sheeple, Sheeple_files/MathJax.js.download"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body class="d-flex flex-column" style="min-height: 100vh;"><div id="MathJax_Message" style="display: none;"></div>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light no-print" id="header-navbar">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navmenu" aria-controls="navmenu" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/">
+      COMP(2041|9044) 20T2
+    </a>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/outline">Outline</a></li>
+        <li class="nav-item active"><a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/student/">Submissions</a></li>
+        <li class="nav-item active"><a class="nav-link" href="https://discourse.cse.unsw.edu.au/cs2041/">Forum</a></li>
+        
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<main class="container" aria-label="Content" style="flex: 1; padding-top: 4rem;">
+
+
+<header>
+
+<h1 class="text-center">
+Assignment 2: sheeple, Sheeple
+</h1>
+
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="text-right text-muted"><small>
+version: 0.1 
+last updated: 2020-07-22 17:00
+</small></p>
+
+
+
+
+<h2>Aims</h2>
+<p>
+This assignment aims to give you
+</p><ul>
+<li> practice in Perl programming generally
+</li><li> experience in translating between complex formats with Perl
+</li><li> clarify your understanding of shell syntax &amp; semantics
+</li></ul>
+<h2>Introduction</h2>
+
+Your task in this assignment to write a shell compiler.
+Generally compilers take a high level language as input
+and output assembler, which can then can be directly executed.
+Your compiler will take shell scripts as input and output Perl.
+Such a translation is useful because
+programmers sometimes convert shell scripts to Perl
+<p>
+Possibly motivations including integration of the code to existing Perl,
+adding   extra functionality more easily available from Perl
+or a need for data structures unavailable in shell.
+</p><p>
+Your task in this assignment
+is to automate this conversion.  You must write a Perl program which
+takes as input a shell script and outputs an equivalent Perl program.
+</p><p>
+The translation of some shell code to Perl is straightforward.
+The translation of other shell code is difficult or infeasible.
+So your program will not be able to translate all shell code to Perl.
+But a tool that  performs only a partial translation of shell to Perl
+could still be very useful.
+</p><p>
+You should assume the Perl code output by your program will
+be subsequently read and modified by humans.  In other word
+you have to output readable Perl code.  For example, you should
+preserve variable names and comments and the code you generate should be sensible formatted.
+</p><p>
+Your compiler must be written in Perl.
+You should call your Perl program <code>sheeple.pl</code>.  It should
+operate as Unix filters typically do, read files specified on the command line
+and if none are specified it should read from standard input (Perl's &lt;&gt; operator
+does this for you).  For example:
+
+</p><pre is="tty"><kbd is="sh">cat gcc.sh</kbd>
+#!/bin/dash
+for c_file in *.c
+do
+    gcc -c $c_file
+done
+<kbd is="sh">./sheeple.pl gcc.sh</kbd>
+#!/usr/bin/perl -w
+foreach $c_file (glob("*.c")) {
+    system "gcc -c $c_file";
+}
+</pre>
+
+If you look carefully at the example above you will notice the Perl code does not
+have exactly the same semantics as the shell code - if there
+are no <code>.c</code> files in the current directory the for loop
+in the shell program executes once and tries to compile a
+non-existent file named <code>*.c</code> whereas the Perl for loop does not execute.
+<p>
+This is a general issue with translating shell to Perl.  In many cases the natural translation
+of the shell code will have slightly different semantics.  For some purposes it might be desirable to
+produce more complex Perl code that matches the semantics exactly, e.g.
+
+</p><pre class="program">#!/usr/bin/perl -w
+if (glob("*.c") {
+    foreach $c_file (glob("*.c")) {
+       system "gcc -c $c_file";
+    }
+} else {
+    system "gcc -c '*.c'";
+}
+</pre>
+
+This is not desirable for our purposes.  Our goal is to produce the
+clearest most-human-readable code so the (simpler) first translation
+is more desirable.
+
+<h2>Subsets</h2>
+The shell features you need to implement is described in the table below
+as a series of nested subsets.
+<p>
+It is suggested you tackle the subset in the order listed
+but this is not required.
+</p><p>
+</p><table class="table table-bordered">
+<thead class="thead-dark">
+<tr>
+<th style="width: 5%">Subset
+</th><th>Syntax
+</th><th style="width: 1%">Keywords
+</th><th>Builtins/<br>Programs
+</th><th>Variables</th><th>Explanation
+</th></tr>
+</thead>
+<tbody>
+<tr class="table-light">
+<td><a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html#subset0">0</a>
+</td><td>=
+<br>$
+<br>#
+</td><td>
+</td><td>echo
+</td><td>
+</td><td>Only simple &amp; obvious statements.
+
+</td></tr><tr class="table-success">
+<td><a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html#subset1">1</a>
+</td><td>?
+<br>*
+<br>[ ]
+</td><td>for<br>do<br>done
+</td><td>exit<br>read<br>cd
+</td><td>
+</td><td>Only simple &amp; obvious statements.
+<br>No nesting of for loops.
+<br><b>? * [ ]</b>  for file matching only.
+
+</td></tr><tr class="table-info">
+<td><a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html#subset2">2</a>
+</td><td>'
+<br>"
+</td><td>if<br>then<br>else<br>elif<br>fi<br>while
+</td><td>test<br>expr
+</td><td>$1<br>$2<br>$3 ...
+</td><td>Only simple &amp; obvious statements.
+<br>No nesting of for/while/if statements.
+
+</td></tr><tr class="table-warning">
+<td><a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html#subset3">3</a>
+</td><td>`
+<br>$()
+<br>$(())
+<br>[]
+</td><td>
+</td><td>echo -n
+</td><td>$#<br>$*<br>$@
+</td><td>for/while/if statements can be nested.
+<br><b>$()</b> as equivalent to back quotes.
+<br><b>$(())</b> for arithmetic.
+<br><b>[]</b> as equivalent to test
+
+</td></tr><tr class="table-danger">
+<td><a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html#subset4">4</a>
+</td><td>&lt; &gt;
+<br>
+&amp;&amp;
+<br>||
+<br>;
+<br>{}
+</td><td>case<br>esac<br>local<br>return
+</td><td>mv<br>chmod<br>ls<br>rm
+</td><td>
+</td><td><b>)</b> as part of case only.
+<br><b>{}</b> for functions only.
+<br>Simple uses of mv/chmod/ls/rm with no command line options.
+</td></tr>
+</tbody>
+</table>
+<h2>Examples</h2>
+
+Some examples of shell code and possible
+translations are available  <a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.html">here</a> and as a <a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/activities/sheeple/examples.zip">zip file</a>
+<p>
+These examples should provide most the information you need to tackle subsets 0 &amp; 1.
+</p><p>
+Translating  subsets 2-4 will require you to discover information from online or other  resources.
+This is a deliberately  part of the assignment.
+</p><p>
+The Perl you generate can and probably will be different to the examples you've been given.
+</p><p>
+But a good  check of the Perl you generate is to execute it and then
+and then use <code>diff</code> to compare its output is identical to the output from the shell script
+
+</p><h2>Assumptions/Clarifications</h2>
+
+Like all good programmers, you should make as few assumptions about
+your input as possible.
+<p>
+You can assume the code you are given is Shell that works with
+the version of  on CSE systems
+(essentially POSIX compatible).
+</p><p>
+Other shells such as Bash contain many other features.
+If these features and not present in <code>/bin/dash</code> CSE machines you do not have to handle these
+</p><p>
+Notice for example the pipe operator ('|') does not appear
+above so you not need to translate pipelines.
+The right parenthesis (')') is in the subset for use in <code>case</code> statements only.
+</p><p>
+You should implement the keywords &amp; builtins listed the above
+table directly in Perl, you
+cannot execute them indirectly via <code>system</code> or other
+Perl modules.
+For example, this is not an acceptable translation.
+
+</p><pre class="program">system "for c_file in *.c; do gcc -c $c_file; done";
+</pre>
+<p>
+The only shell builtins which you must translate directly into Perl are:
+
+</p><pre>exit read cd test expr echo
+</pre>
+
+The builtins (<code>exit read cd</code>) must be translated into Perl to work.
+For example this Perl code does not work:
+
+<pre class="program">system "exit";
+</pre>
+
+The last 3 (<code>test expr echo</code>) can be, and often are implemented by
+stand-alone programs.  So, for example, this Perl code will work:
+
+<pre class="program">system "echo hello world";
+</pre>
+
+Doing this will receive no marks, instead of using <code>system.call</code> you should translate uses of
+<code>test</code>, <code>expr</code> and <code>echo</code> directly to Perl, e.g.:
+
+<pre class="program">print "hello world\n";
+</pre>
+You do have to handle <i>test</i> operators such <code>-r</code> and <code>-d</code>.  They look like options but are
+operators in <i>test</i>'s expression language. There will be little testing of <i>test</i>'s infrequently used operators.
+<p>
+You don't have to handle <i>test</i>'s <code>-ef</code> and <code>-t</code> operators as they
+don't have a simple translation to Perl.
+</p><p>
+The only shell builtin option you need to handle is echo's -n option.
+</p><p>
+You do not need to handle other echo options such as <code>-e</code>.  You do not need to handle
+options  for other builtins.  For example you do not need to handle the various (rarely
+used) <i>read</i> options.
+</p><p>
+Bash has many special variables. You need only handle a few of these,
+which indicate the shell script's arguments.  These special variables need be translated:
+
+</p><pre>$# $* $@ $1 $2 $3 ...
+</pre>
+
+You can assume the shell scripts you are given execute correctly with <code>/bin/dash</code> on a CSE lab machine.
+You program does not have to detect errors in the shell script it is given.
+<p>
+You should assume as little as possible about the formatting of the shell script you
+are given.  However most of the evaluation of your program will be on sensibly formatted
+shell scripts.
+</p><p>
+Most of the evaluation of your program will be on shell code that a  programmer
+might normally write to solve a tasks.
+ocus on translating typical shell scripts, rather than unusual difficult-to-translate Shell.
+</p><p>
+It is a requirement that any comments in the shell code must be transferred to the Perl.
+</p><p>
+With some approaches it can be difficult to transfer comments in exactly the same position,
+in this case it is OK if comments are shifted to some degree.
+</p><p>
+The Perl generated must be sensible indented and formatted, if input the shell script
+is sensibly formatted.
+</p><p>
+If there are shell keywords, e.g. <code>case</code>,  that you cannot translate the preferred  behaviour is to
+include the untranslated shell construct as a comment.  Other sensible behaviour is acceptable.
+</p><p>
+Your Perl (<code>sheeple.pl</code>) should work with the default Perl on a CSE lab machine.
+You are permitted to use any Perl modules installed on CSE systems.
+</p><p>
+The Perl you generate should also work with Perl on a CSE lab machine.
+The Perl you generate should not use Perl modules.
+</p><p>
+The Perl you generate should not generate warnings from Perl's '-w' flags
+unless the warning corresponds to an issue with the Shell.
+
+</p><h2>Hints</h2>
+
+You should follow  discussion about the assignment in the course forum.
+Questions about the assignment should be posted there so all students can see answers.
+<p>
+Get the easiest transformations working first, make simplifying
+assumptions as needed, and get some simple small shell scripts
+successfully transformed.   Then look at handling more constructs and
+removing the assumptions.
+</p><p>
+If you want a good mark, you'll need to  be careful in your handling of syntax
+which has no special meaning in shell but does in Perl.
+</p><p>
+The bulk of knowledge about shell syntax &amp; semantics you need to know
+has been covered in lectures. But if you want to get a very high mark,
+you may need to discover more. Similarly much of the knowledge of
+Perl you need can be determined by looking at a few of the provided examples
+but if you want to get a very high mark you will need to discover more.
+This is deliberate as extracting this type of information
+from documentation is something you'll do a lot of when you graduate.
+
+</p><h2>Demo Shell Scripts</h2>
+
+You should submit five shell scripts named <code>demo00.sh .. demo04.sh</code>
+which your program translates correctly (or at least well).
+These should be realistic shell scripts containing features whose
+successful translation indicates the performance of your assignment.
+Your demo scripts don't have to be original, e.g. they might be lecture examples.
+If they are not original they should be correctly attributed.
+<p>
+If your have implemented most of the subsets these should be longer shell scripts (20+ lines).
+They should if possible  test many aspects of shell to Perl translation.
+
+</p><h2>Test Shell Scripts</h2>
+
+You should submit five shell scripts named <code>test00.sh .. test04.sh</code>
+which each test a single aspect of translation.
+They should be short scripts containing shell code which is likely
+to be mis-translated.
+The <code>test??.sh</code> scripts do not have to be examples that your program translates successfully.
+<p>
+
+You may share your test examples with your friends but
+the ones you submit must be your own creation.
+</p><p>
+The test scripts should show how you've thought about testing carefully.
+They should be as short as possible (even just a single line).
+
+</p><h2>Diary</h2>
+<p>
+You must keep notes on each piece of work you make on this assignment.
+The notes should include date,
+starting and finishing time,
+and a brief description of the work carried out.
+For example:
+</p><p>
+</p><table border="1" cellpadding="10">
+<tbody><tr><th>Date</th><th>Start</th><th>Stop</th><th>Activity</th><th>Comments
+</th></tr><tr><td>29/09/15</td><td>16:00</td><td>17:30</td><td>coding</td><td>implemented exit
+</td></tr><tr><td>30/09/15</td><td>20:00</td><td>10:30</td><td>debugging</td><td>found bug in for loops
+</td></tr></tbody></table>
+<p>
+Include these notes in the files you submit
+as an ASCII file named <code>diary.txt</code>.
+
+
+</p><h2>Change Log</h2>
+<dl class="row">
+<dt class="col-3">
+    Version 0.1<br>
+    <small>(2020-07-22 17:00)</small>
+  </dt>
+  <dd class="col-9">
+    <ul>
+      <li>Initial release</li>
+    </ul>
+  </dd>
+</dl>
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty"><kbd is="sh">2041 autotest sheeple <var>[subset number]</var> sheeple.pl <var>[other .pl or .pm files]</var></kbd>
+</pre>
+
+
+
+<section class="exercise ">
+    <header><h3>Assessment</h3></header>
+    
+
+
+<h3>Submission</h3>
+<p>
+When you are finished working on the assignment,
+you must submit your work by running <code>give</code>:
+
+
+</p><pre is="tty"><kbd is="sh">give cs2041 ass2_sheeple sheeple.pl diary.txt demo??.sh test??.sh <var>[any-other-files]</var></kbd>
+</pre>
+
+
+<p>
+You must run <code>give</code> before <strong>Sunday    August 09 21:59 2020</strong>
+to obtain the marks for this assignment.
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+</p><p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/student/">here</a>.
+
+</p><p>
+Automarking will be run by the lecturer after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+
+</p><p>
+Manual marking will be done by your tutor,
+who will mark for style and readability,
+as described in the <strong>Assessment</strong> section below.
+After your tutor has assessed your work,
+you can <a href="https://cgi.cse.unsw.edu.au/~cs2041/20T2/student/">view your results here</a>;
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+
+
+
+</p><h3>Due Date</h3>
+<p>
+This assignment is tentatively due <strong>Sunday    August 09 21:59 2020</strong>.
+</p><p>
+If your assignment is submitted after this date,
+each hour it is late
+reduces the maximum mark it can achieve by 2%.
+For example,
+if an assignment worth 74% was submitted 10 hours late,
+the late submission would have no effect.
+If the same assignment was submitted 15 hours late,
+it would be awarded 70%,
+the maximum mark it can achieve at that time.
+
+
+
+</p><h2>Assessment Scheme</h2>
+
+<p>
+This assignment will contribute 15 marks
+to your final COMP(2041|9044) mark
+
+</p><p>
+15% of the marks for assignment 2 will come from hand-marking.
+These marks will be awarded on the basis of
+clarity, commenting, elegance and style:
+in other words, you will be assessed on
+how easy it is for a human to read and understand your program.
+
+</p><p>
+5% of the marks for assignment 2
+will be based on the test suite you submit.
+
+</p><p>
+80% of the marks for assignment 2
+will come from the performance of your code on a large series of tests.
+
+</p><p>
+An indicative assessment scheme follows.
+The lecturer may vary the assessment scheme
+after inspecting the assignment submissions,
+but it is likely to be broadly similar to the following:
+
+
+</p><table class="table table-sm w-75 mx-auto">
+<tbody>
+<tr><th scope="row">100
+    </th><td>Subsets 0-4 handled perfectly, sheeple.pl is beautifully readable; excellent test suite
+</td></tr><tr><th scope="row">HD (85+)
+    </th><td>Subsets 0-3 handled, sheeple.pl is good clear code; great test suite
+</td></tr><tr><th scope="row">DN (75+)
+    </th><td>Subsets 0-2 handled, sheeple.pl is readable ; good test suite
+</td></tr><tr><th scope="row">CR (65+)
+    </th><td>Subsets 0-1 handled, sheeple.pl is reasonable readable; OK test suite
+</td></tr><tr><th scope="row">PS (55+)
+    </th><td>Subset 0 translated more-or-less, test suite partly completed
+</td></tr><tr><th scope="row">PS (50+)
+    </th><td>Good progress on assignment, but not passing autotests
+</td></tr><tr><th scope="row">0%
+    </th><td>knowingly providing your work to anyone <br>
+        and it is subsequently submitted (by anyone).
+</td></tr><tr><th scope="row">0 FL for <br> COMP(2041|9044)
+    </th><td>submitting any other person's work; this includes joint work.
+</td></tr><tr><th scope="row">academic <br> misconduct
+    </th><td>submitting another person's work without their consent;<br>
+        paying another person to do work for you.
+</td></tr></tbody>
+</table>
+
+
+
+
+<h3>Intermediate Versions of Work</h3>
+<p>
+You are required to submit intermediate versions of your assignment.
+</p><p>
+Every time you work on the assignment
+and make some progress
+you should copy your work to your CSE account
+and submit it using the <code>give</code> command below.
+It is fine if intermediate versions do not compile
+or otherwise fail submission tests.
+Only the final submitted version of your assignment will be marked.
+</p><p>
+All these intermediate versions of your work
+will be placed in a Git repository
+and made available to you via a web interface
+at <code>https://gitlab.cse.unsw.edu.au/<var>z5555555</var>/20T2-comp2041-ass2_sheeple</code>
+(replacing <i>z5555555</i> with your own zID).
+This will allow you to retrieve earlier versions of your code if needed.
+
+
+
+</p><h3>Attribution of Work</h3>
+
+<p>
+This is an individual assignment.
+
+</p><p>
+The work you submit must be entirely your own work,
+apart from any exceptions explicitly included
+in the assignment specification above.
+Submission of work partially or completely derived from any other person
+or jointly written with any other person is not permitted.
+
+</p><p>
+You are only permitted to request help with the assignment
+in the course forum, help sessions,
+or from the teaching staff (the lecturer(s) and tutors) of COMP(2041|9044).
+
+</p><p>
+Do not provide or show your assignment work to any other person
+(including by posting it on the forum),
+apart from the teaching staff of COMP(2041|9044).
+If you knowingly provide or show your assignment work
+to another person for any reason,
+and work derived from it is submitted,
+you may be penalized,
+even if that work was submitted
+without your knowledge or consent;
+this may apply even if your work is submitted by
+a third party unknown to you.
+You will not be penalized
+if your work is taken
+without your consent or knowledge.
+
+</p><p>
+Submissions that violate these conditions will be penalised.
+Penalties may include negative marks,
+automatic failure of the course,
+and possibly other academic discipline.
+We are also required to report
+acts of plagiarism or other student misconduct:
+if students involved hold scholarships,
+this may result in a loss of the scholarship.
+This may also result in the loss of a student visa.
+
+</p><p>
+Assignment submissions will be examined,
+both automatically and manually,
+for such submissions.
+
+
+
+    </p></section>  
+
+
+
+
+
+</main>
+
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+<p class="text-muted">
+<strong>COMP(2041|9044) 20T2: Software Construction</strong>
+is brought to you by <br>
+the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br>
+at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br>
+For all enquiries, please email the class account at
+<a href="mailto:@cse.unsw.edu.au">cs2041@cse.unsw.edu.au</a><br>
+
+<small>CRICOS Provider 00098G</small>
+</p>
+
+
+</footer>
+
+
+</body></html>

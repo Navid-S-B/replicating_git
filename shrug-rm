@@ -1,0 +1,116 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Files will be removed from the index and  current directory
+# if the user doesn't lose their work.
+# 15-07-2020
+
+# Check for active repo
+if ! test -d .shrug
+then
+    echo "shrug-commit: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+# Check for usage errors with dashed options
+if echo "$1" | egrep -- '^-' > /dev/null
+then
+    check="`echo "$1" | sed 's/^..//'`"
+    if echo "$check" | egrep -v 'force|cached' > /dev/null
+    then
+        echo "usage: shrug-rm [--force] [--cached] <filenames>"
+        exit 1
+    fi
+fi
+
+if echo "$2" | egrep -- '^-' > /dev/null
+then
+    check="`echo "$2" | sed 's/^..//'`"
+    if echo "$check" | egrep -v 'cached' > /dev/null
+    then
+        echo "usage: shrug-rm [--force] [--cached] <filenames>"
+        exit 1
+    fi
+fi
+
+# Go through multiple arguments anc check if file is safe to delete
+for file in "$@"
+do
+    if echo "$file" | egrep -- '--cached|--force' > /dev/null
+    then
+        continue
+    fi
+
+    if test -e ".shrug/.index/$file"
+    then           
+
+        # Check if the file in the workspace is the same bitwise in the snapshot  
+        file_same_workspace_snap=0
+        for file1 in `ls .shrug/.snapshot.*/$file 2> /dev/null`
+        do   
+            # Check files byte to byte from the workspace and snapshot
+            if cmp -s "$file" "$file1"
+            then
+                file_same_workspace_snap=1
+                break            
+            fi
+        done
+
+        # Check if the file in the index is the same bitwise in the snapshot
+        file_same_index_snap=0
+        for file2 in `ls .shrug/.snapshot.*/$file 2> /dev/null`
+        do   
+            # Check files byte to byte from the workspace and snapshot
+            if cmp -s ".shrug/.index/$file" "$file2"
+            then
+                file_same_index_snap=1
+                break            
+            fi
+        done
+
+        # Checking conditions on when to delete
+        if test "$1" = "--force"
+        then
+            rm ".shrug/.index/$file" > /dev/null
+            rm "$file" > /dev/null
+        elif test $file_same_workspace_snap -eq 1
+        then
+            if test $1 = "--cached"
+            then
+                rm ".shrug/.index/$file"
+            else
+                rm ".shrug/.index/$file"
+                rm "$file"
+            fi
+        else
+            # Check if files are same in index and workspace again
+            if cmp -s "$file" ".shrug/.index/$file"
+            then
+                if test $1 = "--cached"
+                then
+                    rm ".shrug/.index/$file"
+                else    
+                    echo "shrug-rm: error: '$file' has changes staged in the index"
+                    exit 1
+                fi
+            # Files are the same in repo
+            elif test $file_same_index_snap -eq 1
+            then
+                if test $1 = "--cached"
+                then
+                    rm ".shrug/.index/$file"
+                # Do not delete if workfing file is not uploaded
+                else
+                    echo "shrug-rm: error: '$file' in repository is different to working file"
+                    exit 1
+                fi
+            # If files are all diferrent at index, repo and workspace
+            else
+                echo "shrug-rm: error: '$file' in index is different to both working file and repository"
+                exit 1
+            fi
+        fi
+    else
+        echo "shrug-rm: error: '$file' is not in the shrug repository"
+        exit 1
+    fi
+done

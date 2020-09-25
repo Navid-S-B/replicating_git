@@ -1,0 +1,13 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Read commit log file
+# 14-07-2020
+
+# Check if no arguments are inputted.
+if test $# -eq 0
+then
+    cat '.shrug/.commit_log.txt'
+else 
+    echo "usage: shrug-log"
+    exit 1
+fi

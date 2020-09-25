@@ -1,0 +1,56 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Show contents of files from .repository
+# 14-07-2020
+
+# Check for active repo
+if ! test -d .shrug
+then
+    echo "shrug-show: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+# Argument error checking
+if test $# -ne 1
+then
+    echo "usage: shrug-show <commit>:<filename>"
+    exit 1
+# If no colon present, activate error
+elif echo "$1" | grep -v ':' > /dev/null
+then
+    echo "shrug-show: error: invalid object $1"
+    exit 1
+fi
+
+# Collect information once error check is complete
+commit_no=`echo $1 | cut -d':' -f1`
+filename=`echo $1 | cut -d':' -f2`
+
+# If the commit_no is empty string
+if test -z "$commit_no"
+then
+    # Check if file is not present in index
+    if test -e ".shrug/.index/$filename"
+    then
+        cat ".shrug/.index/$filename"
+    else
+        echo "shrug-show: error: '$filename' not found in index"
+        exit 1
+    fi
+# Check for errors with the existence of files/snapshot directories
+else
+    # Check if snapshot exists, then check if file exists within snapshot.
+    if test -d ".shrug/.snapshot.$commit_no"
+    then
+        if test -e ".shrug/.snapshot.$commit_no/$filename"
+        then
+            cat ".shrug/.snapshot.$commit_no/$filename"
+        else
+            echo "shrug-show: error: '$filename' not found in commit $commit_no"
+            exit 1
+        fi
+    else
+        echo "shrug-show: error: unknown commit '$commit_no'"
+        exit 1
+    fi
+fi

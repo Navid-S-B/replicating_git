@@ -1,0 +1,17 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Initialise shrug hidden directory i.e. .shrug
+# 14-07-2020
+
+# Check for .shrug directory before initialising
+if test -d .shrug
+then
+    echo "shrug-init: error: .shrug already exists"
+# Add prerequisite directories and files.
+else
+    mkdir '.shrug'
+    cd '.shrug'
+    mkdir '.index'
+    touch .commit_log.txt
+    echo "Initialized empty shrug repository in .shrug"
+fi

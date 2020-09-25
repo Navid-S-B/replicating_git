@@ -1,0 +1,105 @@
+#!/bin/dash
+# Navid Bhuiyan (z5260384)
+# Files will be copied into s snapshot folder of the directory
+# when new files have been made or old files have been modified 
+# on the byte level. Each snapshot folder will be called ".snapshot.[0-9]+"
+# 14-07-2020
+
+# Check for active repo
+if ! test -d .shrug
+then
+    echo "shrug-commit: error: no .shrug directory containing shrug repository exists"
+    exit 1
+fi
+
+# No -a command
+if test $# -eq 2
+then
+    if test $1 != "-m"
+    then
+        echo "usage: shrug-commit [-a] -m commit-message"
+        exit 1
+    else
+        message=$2
+    fi
+# Commit with -a command
+elif test $# -eq 3
+then
+    # Checking if arguments are inputted
+    if test $1 != "-a"
+    then
+        echo "usage: shrug-commit [-a] -m commit-message"
+        exit 1
+    elif test $2 != "-m"
+    then
+        echo "usage: shrug-commit [-a] -m commit-message"
+        exit 1
+    else
+        message=$3
+        for file0 in `ls .shrug/.index 2> /dev/null`
+        do
+            cp -u "$file0" ".shrug/.index"
+        done
+    fi
+# More or less arguments given
+else
+    echo "usage: shrug-commit [-a] -m commit-message"
+    exit 1
+fi
+
+# For loop through number of snapshots
+snapshot_count=0
+for folder in `ls -d .shrug/.snapshot.* 2> /dev/null`
+do
+    snapshot_count=$(($snapshot_count + 1));
+done
+
+# Check if snapshots exists for file commit checking
+if test $snapshot_count -eq 0
+then
+    # snapshot doesn't exist, make new directory and copy files
+    mkdir ".shrug/.snapshot.$snapshot_count"
+    for file1 in `ls .shrug/.index`
+    do  
+        cp ".shrug/.index/$file1" ".shrug/.snapshot.$snapshot_count/$file1"
+    done
+    # Output success message
+    echo "Committed as commit $snapshot_count"
+    echo "$snapshot_count $message" | cat - .shrug/.commit_log.txt > .shrug/temp && mv .shrug/temp .shrug/.commit_log.txt
+    exit 0
+# Snapshot exists, need to check if a an equivalent file is already stored.
+else
+    # Indicator for a different file being present.
+    different_file=0
+    for file2 in `ls .shrug/.index`
+    do        
+        # Check files byte to byte from the index and snapshot
+        if cmp -s ".shrug/.index/$file2" ".shrug/.snapshot.$(($snapshot_count-1))/$file2"
+        then
+            continue
+        # If a different file exist
+        else
+            different_file=1
+            break
+        fi
+    done
+
+    # Do not commit if files have not changed.
+    if test $different_file -eq 0
+    then
+        echo "nothing to commit"
+        exit 1
+    # Otherwise, make new snapshot.
+    else
+        # Make new snapshot directory and copy files over
+        mkdir ".shrug/.snapshot.$snapshot_count"
+        for file3 in `ls .shrug/.index`
+        do
+            cp ".shrug/.index/$file3" ".shrug/.snapshot.$snapshot_count"
+        done
+        # Output success message
+        echo "Committed as commit $snapshot_count"
+        echo "$snapshot_count $message" | cat - .shrug/.commit_log.txt > .shrug/temp && mv .shrug/temp .shrug/.commit_log.txt
+        exit 0
+    fi
+fi
