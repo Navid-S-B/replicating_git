@@ -6,4 +6,6 @@ Based on the specifications, we had to implement simple git functions such as in
 I used a hidden folder to hold the saved code, but I also added rules and conditions where files are not
 uneccessarily overwritten nor accidently deleted.
 
-This project will be continued to be improved on, to improve my shell scripting skills! 
+This project will be continued to be improved on, to improve my shell scripting skills!
+
+Refer to the spec for further detail.
